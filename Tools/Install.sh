@@ -45,11 +45,11 @@ fi
 if [ -f 'mods_directory.txt' ]
 then
     echo 'using previous saved mod directory (in mods_directory.txt)'
-    MOD_DIRECTORY=`cat mods_directory`
+    MOD_DIRECTORY=`cat mods_directory.txt`
 else
     useGraphicalFilePrompt=true
 
-    if useGraphicalFilePrompt
+    if $useGraphicalFilePrompt
     then
         if [ -n `command -v zenity` ]
         then
@@ -64,7 +64,7 @@ you can install zenity, or alternatively enter the mods directory here (preferab
         read -p 'Please specify your mods directory (preferably absolute):' MOD_DIRECTORY
     fi
 
-    if ! [ -n "${MOD_DIRECTORY}/../Civ4BeyondSword.exe" ]
+    if ! [ -f "`printf '%q' "${MOD_DIRECTORY}"`/../Civ4BeyondSword.exe" ]
     then
         echo 'The mod directory specified does not appear to be correct'
         exit 1
@@ -73,18 +73,19 @@ you can install zenity, or alternatively enter the mods directory here (preferab
     echo $MOD_DIRECTORY > mods_directory.txt
 fi
 
+MOD_DIRECTORY=`printf '%q' "${MOD_DIRECTORY}"`
+
 if [ -d "${MOD_DIRECTORY}/Caveman2Cosmos" ]
 then
     if ! [ -L "${MOD_DIRECTORY}/Caveman2Cosmos" ]
     then
-        mv ${MOD_DIRECTORY}/Caveman2Cosmos ${MOD_DIRECTORY}/Caveman2CosmosBackup
+        mv "${MOD_DIRECTORY}/Caveman2Cosmos" "${MOD_DIRECTORY}/Caveman2CosmosBackup"
     fi
 fi
-
 
 C2C_DIRECTORY=`pwd | sed 's/^\(.*Caveman2Cosmos\).*$/\1/g'`
 
 if ! [ -d "${MOD_DIRECTORY}/Caveman2Cosmos" ]
 then
-    ln -s ${C2C_DIRECTORY} ${MOD_DIRECTORY}/Caveman2Cosmos
+    ln -s ${C2C_DIRECTORY} "${MOD_DIRECTORY}/Caveman2Cosmos"
 fi

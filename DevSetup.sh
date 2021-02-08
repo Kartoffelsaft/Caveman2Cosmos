@@ -11,6 +11,6 @@ cd ./Tools
         ./InstallGit.sh
     cd ..
     ./Install.sh
-    ./_MakeDLL.sh
-    ./UpdateVSUserFile.sh
+    ./_MakeDLL.sh release build
+    ./_MakeDLL.sh release deploy
 cd ..

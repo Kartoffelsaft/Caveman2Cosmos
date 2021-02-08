@@ -5,7 +5,7 @@
 #include "CvUnitFilters.h"
 #include "CvUnitGrouping.h"
 #include "CvUnitSort.h"
-#include "CvGameCoreDLLUnDefNew.h"
+#include "CvGameCoreDLLUndefNew.h"
 #include "CvGameCoreDLLDefNew.h"
 
 // Dale - AB: Bombing PLEASE NOTE!

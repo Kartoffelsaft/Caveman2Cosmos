@@ -300,7 +300,7 @@ namespace python = boost::python;
 #include "FAssert.h"
 #include "Stopwatch.h"
 #include "CvGameCoreDLLDefNew.h"
-#include "CvGameCoreDLLUnDefNew.h"
+#include "CvGameCoreDLLUndefNew.h"
 #include "FDataStreamBase.h"
 #include "FFreeListArrayBase.h"
 #include "FFreeListTrashArray.h"
