@@ -62,11 +62,16 @@ DEPENDENCIES=(
     '-I../Sources/include'
     '-I../Build/include'
 )
+DEFINES=(
+    '-D_MSC_VER=1928' # trick google sparsehash into not using stdext::
+    '-DBOOST_PP_VARIADICS=0'
+    '-DBOOST_PP_VARIADICS_MSVC=0'
+)
 SOURCES=`find ../Sources | rg '\.c(pp)?'`
 
 if [ "${2}" = "build" ]
 then
-    $COMPILER -o $DLL_PATH ${SOURCES[*]} ${COMPILER_ARGS[*]} ${DEPENDENCIES[*]}
+    $COMPILER -o $DLL_PATH ${SOURCES[*]} ${COMPILER_ARGS[*]} ${DEFINES[*]} ${DEPENDENCIES[*]}
 elif [ "${2}" = "deploy" ]
 then
     # the PDB and FDB are unused for now
